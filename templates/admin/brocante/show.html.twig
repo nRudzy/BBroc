@@ -1,0 +1,118 @@
+{% extends 'admin/_base.html.twig' %}
+
+{% block body %}
+    <a class="btn btn-secondary pull-left" href="{{ path('admin-brocantes') }}"><i class="fas fa-arrow-left"></i> Retour</a>
+    <a class="btn btn-primary pull-right" href="{{ path('admin-brocante_editer', {'id' : brocante.idBrocante}) }}"><i
+                class="fas fa-pen"></i> Modifier</a>
+
+    <br/>
+
+    <br/>
+
+    <h2 class="s_adresse">Adresse</h2>
+
+    {{ brocante.nom }}
+
+    <br/>
+
+    {{ brocante.rue }}
+
+    <br/>
+
+    {{ brocante.lieu.villeDepartement }} {{ brocante.lieu.villeNomReel }}
+
+    <br/>
+
+    <br/>
+
+    <div class="broc_show_showID">
+        <div class="id_infos_head">
+            <i class="far fa-question-circle fa-lg"></i>
+            <span>Informations utiles</span>
+        </div>
+
+        <br/>
+
+        <div class="id_presentation">
+            <div class="id_img">
+                <img src="{% if brocante.image %}{{ brocante.image }}{% else %}{{ asset('build/no_image.png') }}{% endif %}"
+                     alt="{{ brocante.nom }}"/>
+            </div>
+
+            <div class="id_horaires">
+                <i class="far fa-clock fa-lg f_logo"></i>
+                <span class="id_f">Horaires d'accès</span>
+                <span class="id_f_a">A partir de {{ brocante.date | date('H:i') }}</span>
+            </div>
+
+            <div class="id_entree">
+                <i class="fas fa-euro-sign fa-lg f_logo"></i>
+                <span class="id_f">Entrée</span>
+
+                {% if brocante.prix != 0 %}
+                    <span class="id_f_a">{{ brocante.prix }}€</span>
+                {% else %}
+                    <span class="id_f_a">Gratuite</span>
+                {% endif %}
+            </div>
+
+            <div class="id_nb_exposants">
+                <i class="fas fa-user fa-lg f_logo"></i>
+                <span class="id_f">Exposants</span>
+                <span class="id_f_a">{{ nb_participants }}</span>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="id_description">
+            {{ brocante.description|nl2br }}
+        </div>
+
+        <br/>
+
+        <br/>
+    </div>
+
+    <div class="broc_access">
+        <div class="access_title">
+            <i class="far fa-question-circle fa-lg"></i>
+            <span>Accès rapide</span>
+        </div>
+
+        <br/>
+
+        {# Malheureusement Google a changé sa politique et on doit payer pour un quotas pour sa clé API #}
+        {# Donc tout est implémenté mais donc pas disponible... #}
+        <div class="access_map" id="access_map">
+            <script>
+                function initMap() {
+
+                    {# Variable localisation de la brocante en question#}
+                    let this_brocante = {
+                        lat:{{ brocante.lieu.villeLatitudeDeg }},
+                        lng: {{ brocante.lieu.villeLongitudeDeg }} };
+
+                    {# Les options de la carte google #}
+                    let options = {
+                        zoom: 8,
+                        center: this_brocante
+                    };
+
+                    {# On créé ici la carte google #}
+                    let map = new google.maps.Map(document.getElementById('access_map'), options);
+
+                    {# Ajouter un marqueur #}
+                    let marker = new google.maps.Marker({position: this_brocante, map: map});
+
+                }
+            </script>
+
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg_qCosJ9OucLeWSMgzK2zHKGIiI2DzSU&callback=initMap"
+                    type="text/javascript"></script>
+        </div>
+
+        <br/>
+    </div>
+{% endblock %}

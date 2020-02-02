@@ -1,0 +1,7 @@
+{% extends 'admin/_base.html.twig' %}
+
+{% block body %}
+    <h1 class="center">Êtes-vous sûr de vouloir supprimer {{ utilisateur.nom }} {{ utilisateur.prenom }} ?</h1>
+
+    {{ form(form) }}
+{% endblock %}

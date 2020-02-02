@@ -1,0 +1,44 @@
+{% extends 'admin/_base.html.twig' %}
+
+{% block body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">NOM</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Rôle</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for utilisateur in pager.currentPageResults %}
+                <tr>
+                    <th class="nom">{{ utilisateur.nom }}</th>
+                    <th class="prenom">{{ utilisateur.prenom }}</th>
+                    <th class="email">{{ utilisateur.email }}</th>
+
+                    {% if utilisateur.role == "ROLE_ADMIN" %}
+                        <th class="role">Administrateur</th>
+                    {% else %}
+                        <th class="role"></th>
+                    {% endif %}
+
+                    <th class="modifier">
+                        <a class="btn btn-primary"
+                           href="{{ path('admin-utilisateurs_editer', {'id': utilisateur.idUtilisateur}) }}"><i
+                                    class="fas fa-pen"></i> Modifier</a>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if pager.haveToPaginate %}
+        <div class="pagerfanta center advancedCenter">
+            {{ pagerfanta(pager, 'twitter_bootstrap4', {'routeName': 'admin-utilisateurs', 'prev_message': '← Précédent', 'next_message': 'Suivant →'}) }}
+        </div>
+    {% endif %}
+{% endblock %}

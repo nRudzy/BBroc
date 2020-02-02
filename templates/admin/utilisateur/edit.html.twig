@@ -1,0 +1,12 @@
+{% extends 'admin/_base.html.twig' %}
+
+{% block body %}
+    <h1>Edition de l'utilisateur !</h1>
+
+    <a class="btn btn-danger btn_pull-right"
+       href="{{ path('admin-utilisateurs_supprimer', {'id': utilisateur.idUtilisateur}) }}">Supprimer l'utilisateur</a>
+    <br/>
+    <br/>
+
+    {{ form(form) }}
+{% endblock %}

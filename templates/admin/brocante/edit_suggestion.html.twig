@@ -1,0 +1,33 @@
+{% extends 'admin/_base.html.twig' %}
+
+{% block body %}
+    <h1>Edition de la brocante !</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.lieu) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.rue) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.description) }}
+
+    {{ form_row(form.isImage, {'attr': {'onchange': "changeImg(this);"}}) }}
+    {{ form_row(form.image) }}
+
+    <ul class="places" data-prototype="{{ form_widget(form.places.vars.prototype)|e('html_attr') }}">
+        {{ form_row(form.places) }}
+    </ul>
+
+    {{ form_row(form.submit) }}
+    {{ form_row(form.cancel) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('add_place_button_create') }}
+{% endblock %}

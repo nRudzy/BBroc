@@ -1,0 +1,31 @@
+<li class="nav-item {% if app.request.get('_route') in ['suggerer_brocante'] %}active{% endif %}">
+    <a class="h_suggest nav-link" href="{{ path('suggerer_brocante') }}"><span>Suggérer une brocante</span></a>
+</li>
+
+
+{% if app.user %}
+    <li class="nav-item dropdown" id="nav-account">
+        <a class="h_account nav-link dropdown-toggle {% if app.request.get('_route') in ['mon-compte'] %}active{% endif %}"
+           id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Mon
+                compte</span></a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a href="{{ path('mon-compte') }}"
+               class="{% if app.request.get('_route') in ['mon-compte'] %}active{% endif %} dropdown-item">
+                <i class="fa fa-user"></i> <strong>{{ app.user }}</strong>
+            </a>
+            <div class="dropdown-divider"></div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin-brocantes') }}" class="dropdown-item"><i class="fa fa-wrench"></i>
+                    Administration</a>
+            {% endif %}
+            <a href="{{ path('deconnexion') }}" class="dropdown-item"><i class="fa fa-sign-out-alt"></i> Déconnexion</a>
+        </div>
+    </li>
+{% else %}
+    <li class="nav-item">
+        <a href="{{ path('connexion') }}"
+           class="{% if app.request.get('_route') in ['connexion', 'inscription'] %}active{% endif %} nav-link h_account"
+           title="Se connecter"><span>Connexion</span></a>
+    </li>
+{% endif %}

@@ -1,0 +1,160 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+    <h2 class="s_adresse">Adresse</h2>
+
+    {{ brocante.nom }}
+
+    <br/>
+
+    {{ brocante.rue }}
+
+    <br/>
+
+    {{ brocante.lieu.villeDepartement }} {{ brocante.lieu.villeNomReel }}
+
+    <br/>
+
+    <br/>
+
+    <div class="broc_show_showID">
+        <div class="id_infos_head">
+            <i class="far fa-question-circle fa-lg"></i>
+            <span>Informations utiles</span>
+        </div>
+
+        <br/>
+
+        <div class="id_presentation">
+            <div class="id_img">
+                <img src="{% if brocante.image %}{{ brocante.image }}{% else %}{{ asset('build/no_image.png') }}{% endif %}"
+                     alt="{{ brocante.nom }}"/>
+            </div>
+
+            <div class="id_horaires">
+                <i class="far fa-clock fa-lg f_logo"></i>
+                <span class="id_f">Horaires d'accès</span>
+                <span class="id_f_a">A partir de {{ brocante.date | date('H:i') }}</span>
+            </div>
+
+            <div class="id_entree">
+                <i class="fas fa-euro-sign fa-lg f_logo"></i>
+                <span class="id_f">Entrée</span>
+
+                {% if brocante.prix != 0 %}
+                    <span class="id_f_a">{{ brocante.prix }}€</span>
+                {% else %}
+                    <span class="id_f_a">Gratuite</span>
+                {% endif %}
+            </div>
+
+            <div class="id_nb_exposants">
+                <i class="fas fa-user fa-lg f_logo"></i>
+                <span class="id_f">Exposants</span>
+                <span class="id_f_a">{{ nb_participants }}</span>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="id_description">
+            {{ brocante.description|nl2br }}
+        </div>
+
+        <br/>
+
+        <br/>
+    </div>
+    <div class="broc_access">
+        <div class="access_title">
+            <i class="far fa-question-circle fa-lg"></i>
+            <span>Accès rapide</span>
+        </div>
+
+        <br/>
+
+        {# Malheureusement Google a changé sa politique et on doit payer pour un quotas pour sa clé API #}
+        {# Donc tout est implémenté mais donc pas disponible... #}
+        <div class="access_map" id="access_map">
+            <script>
+                function initMap() {
+
+                    {# Variable localisation de la brocante en question#}
+                    let this_brocante = {
+                        lat:{{ brocante.lieu.villeLatitudeDeg }},
+                        lng: {{ brocante.lieu.villeLongitudeDeg }} };
+
+                    {# Les options de la carte google #}
+                    let options = {
+                        zoom: 8,
+                        center: this_brocante
+                    };
+
+                    {# On créé ici la carte google #}
+                    let map = new google.maps.Map(document.getElementById('access_map'), options);
+
+                    {# Ajouter un marqueur #}
+                    var marker = new google.maps.Marker({position: this_brocante, map: map});
+
+                }
+            </script>
+
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg_qCosJ9OucLeWSMgzK2zHKGIiI2DzSU&callback=initMap"
+                    type="text/javascript"></script>
+        </div>
+
+        <br/>
+
+        <div class="access_info">
+            <strong>Pour plus d'informations, veuillez contacter la mairie.</strong>
+        </div>
+    </div>
+
+    <br/>
+
+    <hr/>
+
+    {% if app.user %}
+        {% if not userParticipe %}
+            {{ form_start(form) }}
+
+            {{ form_row(form.role_brocante, {'attr': {'onchange': "changeInputPlace(this);"}}) }}
+            {{ form_row(form.place) }}
+
+            {{ form_row(form.submit) }}
+            {{ form_end(form) }}
+        {% else %}
+            <p>Vous participez à cette brocante en tant que {{ role.roleBrocante }} !</p>
+
+            {% if role.roleBrocante == "Brocanteur" %}
+                <p>Vous avez réservé une place de {{ place.idEmplacement.surface }}m² à {{ place.prix }}€ (pensez à
+                    ramener la somme dûe le jour de l'événement)</p>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        Veuillez vous <a href="{{ path('connexion') }}">connecter</a> pour vous inscrire.
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        (function () {
+            let input = document.getElementById("participe_role_brocante");
+
+            changeInputPlace(input);
+        })();
+
+        function changeInputPlace(input) {
+            let formPlace = document.getElementById("participe_place").parentElement;
+
+            if (input.value === "Brocanteur") {
+                formPlace.style.display = '';
+                formPlace.required = true;
+            } else {
+                formPlace.style.display = 'none';
+                formPlace.required = false;
+            }
+        }
+    </script>
+{% endblock %}

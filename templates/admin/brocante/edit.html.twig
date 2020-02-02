@@ -1,0 +1,71 @@
+{% extends 'admin/_base.html.twig' %}
+
+{% block body %}
+    <h1>Edition de la brocante !</h1>
+
+    <a class="btn btn-danger btn_pull-right"
+       href="{{ path('admin-brocantes_supprimer', {'id': brocante.idBrocante}) }}">Supprimer la brocante</a>
+    <br/>
+    <br/>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.lieu) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.rue) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.description) }}
+
+    {{ form_row(form.isImage, {'attr': {'onchange': "changeImg(this);"}}) }}
+    {{ form_row(form.image) }}
+
+    <div class="places">
+        <h5>Places déjà créées</h5>
+        <p>Nombre de places: {{ brocante.places | length }}</p>
+        <p>Nombre de places disponibles: {{ brocante.places | length - brocante.participers | length }}</p>
+
+        <ul>
+            {% for place in places %}
+                <li>
+                    <p>{{ place["1"] }} places de {{ place["surface"] }}m² à {{ place["0"].prix }}€
+                        ({{ place["2"] }} disponibles)</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <ul class="places" data-prototype="{{ form_widget(form.places.vars.prototype)|e('html_attr') }}">
+        {{ form_row(form.places) }}
+    </ul>
+
+    {{ form_row(form.submit) }}
+    {{ form_row(form.cancel) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('add_place_button_edit') }}
+
+    <script>
+        (function () {
+            let input = document.getElementById("brocante_isImage");
+
+            changeImg(input);
+        })();
+
+        function changeImg(input) {
+            let formImage = document.getElementById("brocante_image").parentElement.parentElement;
+
+            if (input.checked) {
+                formImage.style.display = '';
+            } else {
+                formImage.style.display = 'none';
+            }
+        }
+    </script>
+{% endblock %}

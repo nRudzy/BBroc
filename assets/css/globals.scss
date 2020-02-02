@@ -1,0 +1,81 @@
+/********** Bootstrap Override **********/
+
+$body-color: darken($white, 5%);
+
+// Effectively loading Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+/********** Bootstrap Forms Override **********/
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"] {
+    &.form-control {
+      line-height: $line-height-base;
+    }
+  }
+}
+
+/********** Fontawesome Override **********/
+
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+
+// Effectively loading Fontawesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+
+/********** Custom CSS **********/
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.btn_pull-right {
+  float: right;
+  color: white !important;
+
+  @media (max-width: map_get($container-max-widths, sm)) {
+    margin: 5px 0;
+    width: 100%;
+  }
+}
+
+.table {
+  color: black;
+}
+
+.center {
+  text-align: center;
+}
+
+.advancedCenter {
+  margin: 0 auto;
+  display: table;
+}
+
+
+/* select2 */
+
+//.select2-results__option {
+//  display: none !important;
+//}
+
+//.select2-results__message {
+//  display: block !important;
+//}
+
+.select2-results {
+  color: black;
+}
+
+/* fin select2 */
+

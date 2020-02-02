@@ -1,0 +1,336 @@
+@import "variables";
+@import "globals";
+
+/******************** ALL ************************/
+.site {
+  /******************** HEADER ADMIN ************************/
+  .ha_title {
+    padding-left: 50px;
+  }
+
+  .ha_title span {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Lucida Console", Courier, monospace;
+
+  }
+
+  .navbarre {
+    background-color: #002752;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .navbarre li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .ha_broc {
+    border: 2px solid white;
+    border-radius: 1.5em;
+    background-color: white;
+    padding-right: 50px;
+  }
+
+  .ha_broc span {
+    color: #002752;
+    text-align: center;
+  }
+
+  .ha_broc_s {
+    border: 2px solid white;
+    border-radius: 1.5em;
+    padding-right: 50px;
+  }
+
+  .ha_users {
+    border: 2px solid white;
+    border-radius: 1.5em;
+    padding-right: 50px;
+  }
+
+  /******************** FIN HEADER ADMIN ************************/
+
+
+  /******************** HEADER ************************/
+  header {
+    grid-area: header;
+  }
+
+  .h_title {
+    padding-left: 50px;
+  }
+
+  .h_title span {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Lucida Console", Courier, monospace;
+
+  }
+
+  .navnavbar {
+    background-color: $sitecouleur;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .navnavbar li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .h_account {
+    border: 2px solid white;
+    border-radius: 1.5em;
+  }
+
+  .h_account span {
+    color: white;
+    text-align: center;
+  }
+
+  .h_account:hover {
+    cursor: pointer;
+  }
+
+  .h_suggest {
+    border: 2px solid white;
+    border-radius: 1.5em;
+    background-color: white;
+    padding-right: 50px;
+  }
+
+  .h_suggest span {
+    color: $sitecouleur;
+    text-align: center;
+  }
+
+  /********************  END HEADER ************************/
+
+
+  /******************** MAIN ************************/
+  main {
+    grid-area: main;
+    color: $black;
+
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 20px auto;
+
+    @media (min-width: 576px) {
+      max-width: 540px;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 720px;
+    }
+
+    @media (min-width: 992px) {
+      max-width: 960px;
+    }
+
+    @media (min-width: 1200px) {
+      max-width: 1140px;
+    }
+  }
+
+  /******************** END MAIN ************************/
+
+
+  /******************** FOOTER ************************/
+  footer {
+    grid-area: footer;
+    background-color: #4e555b;
+
+    hr {
+      height: 1px;
+      border: 0;
+      border-top: 1px solid #fff;
+      padding: 0;
+    }
+
+    .foot1 {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas: "f_contact f_propos f_networks";
+      padding: 20px;
+
+      @media (max-width: map_get($container-max-widths, sm)) {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "f_contact" "f_propos" "f_networks";
+
+        padding: 20px;
+      }
+
+      .f_contact {
+        grid-area: f_contact;
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas: "f_cont" "f_add" "f_bat" "f_mail";
+
+        padding-top: 15px;
+
+        .f_cont {
+          grid-area: f_cont;
+          padding-bottom: 10px;
+        }
+
+        .f_add {
+          grid-area: f_add;
+          font-size: 14px;
+          padding-left: 2px;
+
+          .f_text {
+            padding-left: 6px;
+          }
+        }
+
+        .f_bat {
+          grid-area: f_bat;
+          font-size: 14px;
+
+          .f_text {
+            padding-left: 2px;
+          }
+        }
+
+        .f_mail {
+          grid-area: f_mail;
+          font-size: 14px;
+
+          .f_text {
+            padding-left: 4px;
+          }
+
+          a {
+            color: dodgerblue;
+            text-decoration: none;
+          }
+
+          a:hover {
+            color: #e9780e;
+          }
+        }
+      }
+
+      .f_propos {
+        grid-area: f_propos;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "f_cont" "f_apropos" "f_aide";
+
+        padding: 15px 20px 0 20px;
+
+        @media (max-width: map_get($container-max-widths, sm)) {
+          padding: 15px 20px 0 0;
+        }
+
+        a {
+          text-decoration: none;
+          color: white;
+        }
+
+        a:hover {
+          color: #e9780e;
+        }
+
+        .f_cont {
+          grid-area: f_cont;
+          padding-bottom: 10px;
+        }
+
+        .f_apropos {
+          grid-area: f_apropos;
+
+        }
+
+        .f_aide {
+          grid-area: f_aide;
+        }
+      }
+
+      .f_networks {
+        grid-area: f_networks;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto;
+        grid-template-areas: "f_follow f_follow f_follow" "f_facebook f_instagram f_twitter";
+
+        padding-top: 15px;
+
+        .f_follow {
+          grid-area: f_follow;
+        }
+
+        .f_facebook {
+          grid-area: f_facebook;
+
+          a {
+            color: white;
+          }
+
+          a:hover {
+            color: $sitecouleur;
+          }
+        }
+
+        .f_instagram {
+          grid-area: f_instagram;
+
+          a {
+            color: white;
+          }
+
+          a:hover {
+            color: #d62976;
+          }
+        }
+
+        .f_twitter {
+          grid-area: f_twitter;
+
+          a {
+            color: white;
+          }
+
+          a:hover {
+            color: #1da1f2;
+          }
+        }
+      }
+    }
+
+    .foot2 {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-areas: "f_cpr f_cprnames";
+      padding-bottom: 25px;
+
+      .f_cpr {
+        grid-area: f_cpr;
+        font-size: 13px;
+      }
+
+      .f_cprnames {
+        grid-area: f_cprnames;
+        text-align: right;
+        font-size: 13px;
+      }
+    }
+  }
+
+  /******************** END FOOTER ************************/
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "header" "main" "footer";
+}
+
+/******************** END ALL ************************/
+

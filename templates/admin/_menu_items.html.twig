@@ -1,0 +1,12 @@
+<li class="nav-item {% if app.request.get('_route') in ['admin-brocantes', 'admin-brocante_creer', 'admin-brocante_editer', 'admin-brocantes_consulter'] %}active{% endif %}">
+    <a class="ha_broc nav-link" href="{{ path('admin-brocantes') }}"><span>Brocantes</span></a>
+</li>
+
+<li class="nav-item {% if app.request.get('_route') in ['admin-brocantes_suggest', 'admin-brocante_creer', 'admin-brocante_editer', 'admin-brocantes_consulter'] %}active{% endif %}">
+    <a class="ha_broc_s nav-link" href="{{ path('admin-brocantes-suggest') }}">Brocantes suggérées</a>
+</li>
+
+
+<li class="nav-item {% if app.request.get('_route') in ['admin-utilisateurs'] %}active{% endif %}">
+    <a class="ha_users nav-link" href="{{ path('admin-utilisateurs') }}">Utilisateurs</a>
+</li>

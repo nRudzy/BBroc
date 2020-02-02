@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}B'Broc{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ asset('build/bbroc-logo.jpg') }}"/>
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="site">
+    <header>
+        {% include '_header.html.twig' %}
+    </header>
+
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer>
+        {% include '_footer.html.twig' %}
+    </footer>
+</div>
+
+{{ encore_entry_script_tags('app') }}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

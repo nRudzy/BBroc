@@ -1,0 +1,14 @@
+<nav class="navnavbar navbar navbar-expand-lg navbar-dark">
+    <a class="h_title navbar-brand" href="{{ path('accueil') }}"><span>B'BROC</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            {% include'_menu_items.html.twig' %}
+        </ul>
+
+    </div>
+</nav>

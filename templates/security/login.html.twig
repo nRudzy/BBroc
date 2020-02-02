@@ -1,0 +1,39 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+    <h3>Connexion</h3>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <form action="{{ path('connexion') }}" method="post">
+        <div id="form">
+            <div class="form-group">
+                <label class="control-label required" for="username">Adresse mail :</label>
+                <input id="username" class="form-control" type="text" name="_username"
+                       value="{{ last_username }}"
+                       required="required"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label required" for="password">Mot de passe :</label>
+                <input id="password" class="form-control" type="password" name="_password" required="required"/>
+            </div>
+            <div class="form-group">
+                <a href="{{ path('inscription') }}" class="btn btn-light">Inscription</a>
+                <button class="btn btn-primary" type="submit" name="submit">Se connecter</button>
+            </div>
+        </div>
+    </form>
+
+    <h4>Mot de passe oublié</h4>
+    {#TODO: MDP oublié#}
+    <p>Vous avez oublié votre mot de passe ou votre mot de passe ne fonctionne plus ? Il vous
+        suffit de remplir le <a href="{#{{ path('recuperation-compte') }}#}#">formulaire de
+            récupération de compte</a> et vous recevrez un mail qui vous permettra de
+        réinitialiser votre mot de passe</p>
+    <br>
+    <h4>Votre compte est désactivé</h4>
+    <p>Si lors de la connexion le site vous indique que votre compte est désactivé, c'est que
+        vous venez de vous inscrire sur le site et que votre compte n'est pas encore actif, il
+        vous suffit de vous rendre sur votre boite mail correspondant à l'adresse que vous avez
+        donné lors de votre inscription pour activer votre compte.</p>
+{% endblock %}

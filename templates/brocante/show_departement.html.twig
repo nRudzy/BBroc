@@ -1,0 +1,57 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+    <h2>Brocantes et vide-greniers du {{ villes_dep }}</h2>
+
+    <hr/>
+
+    <br/>
+
+    <div class="broc_show " id="link_broc">
+        {% set currentDate = null %}
+        {% for brocante in pager %}
+
+            {% if brocante.suggestion == false %}
+
+                {% if brocante.date|date('d/m/Y') != currentDate|date('d/m/Y') %}
+                    <div class="b_main_date">
+                        {{ brocante.date | date('d/m/Y') }}
+                    </div>
+                    {% set currentDate = brocante.date %}
+                {% endif %}
+
+                <a href="{{ path('brocante_show' , {'id' : brocante.idBrocante}) }}">
+                    <div class="block_show">
+                        <div class="b_date">
+                            {{ brocante.date | date('d/m/Y') }}
+                        </div>
+
+                        <div class="b_icon">
+                            <i class="fas fa-box-open fa-2x"></i>
+                        </div>
+
+                        <div class="b_titles">
+                            <span class="b_titles_ville"> {{ brocante.lieu.villeNomReel }} </span> : {{ brocante.nom }}
+                        </div>
+
+                        <div class="b_subtitles" id="b_subtitles">
+                            {{ brocante.lieu.villeDepartement }} -
+                            {{ brocante.type }} -
+                            {{ brocante.rue }}
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <br/>
+
+    <br/>
+
+    {% if pager.haveToPaginate %}
+        <div class="pagerfanta center advancedCenter">
+            {{ pagerfanta(pager, 'twitter_bootstrap4', {'routeName': 'br_show_departement', 'routeParams' : {'villes_dep': villes_dep}, 'prev_message': '← Précédent', 'next_message': 'Suivant →'}) }}
+        </div>
+    {% endif %}
+{% endblock %}

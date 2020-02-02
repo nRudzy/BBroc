@@ -1,0 +1,536 @@
+@import "variables";
+@import "globals";
+@import "structure";
+
+/************** PAGE D'ACCUEIL **************/
+
+.map {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: "map__image map__list" "info info";
+
+  @media (max-width: map_get($container-max-widths, lg)) {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: "map__list" "info";
+
+    .map__image {
+      display: none;
+    }
+  }
+
+  .map__image {
+    grid-area: map__image;
+    padding-top: 50px;
+
+    svg {
+      height: 550px;
+
+    }
+
+    path {
+      fill: #575dff;
+      stroke: #FFFFFF;
+      stroke-width: 1px;
+      transition: fill 0.2s;
+      cursor: pointer;
+
+      :hover {
+        fill: #E9780E;
+      }
+    }
+
+    .is-active path {
+      fill: #E9780E;
+    }
+  }
+
+  .map__list {
+    grid-area: map__list;
+    font-size: 13px;
+    padding: 0 0 10px 10px;
+
+    a {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #444;
+      font-size: 13px;
+      text-decoration: none;
+
+      &.is-active,
+      &:hover {
+        color: #e9780e;
+        font-weight: bold;
+      }
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: auto auto auto;
+
+      @media (max-width: map_get($container-max-widths, xl)) {
+        grid-template-columns: auto auto;
+      }
+
+      @media (max-width: map_get($container-max-widths, lg)) {
+        grid-template-columns: auto auto auto;
+      }
+
+      @media (max-width: map_get($container-max-widths, md)) {
+        grid-template-columns: auto auto;
+      }
+
+      @media (max-width: map_get($container-max-widths, sm)) {
+        grid-template-columns: auto;
+      }
+
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .info {
+    grid-area: info;
+    padding-top: 15px;
+    font-size: 13px;
+    color: #5a6268;
+  }
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "article1 article2 article3";
+  grid-column-gap: 15px;
+
+  padding: 15px 0 100px 0;
+
+  @media (max-width: map_get($container-max-widths, sm)) {
+    grid-template-columns: auto;
+    grid-template-areas: "article1" "article2" "article3";
+    grid-column-gap: 0;
+    grid-row-gap: 50px;
+  }
+
+  .article1 {
+    grid-area: article1;
+
+    img {
+      width: 90%;
+    }
+  }
+
+  .article2 {
+    grid-area: article2;
+
+    img {
+      width: 90%;
+    }
+  }
+
+  .article3 {
+    grid-area: article3;
+
+    img {
+      width: 92%;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .titre {
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #4e555b;
+
+    &:hover {
+      color: #e9780e;
+    }
+  }
+
+  .desc {
+    padding-top: 1px;
+    font-size: 14px;
+    color: #5a6268;
+  }
+}
+
+.main_title {
+  text-align: center;
+}
+
+
+/************** FIN PAGE D'ACCUEIL **************/
+
+
+/************** PAGE D'INDEX DES BROCANTES **************/
+
+.brocantes {
+  text-align: center;
+
+  .brocante {
+    display: inline-grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "image" "nom" "lieu_date" "actions";
+
+    text-align: left;
+
+    margin: 10px;
+    padding: 10px;
+
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+
+    @media (max-width: map_get($container-max-widths, sm)) {
+      margin: 5px 0;
+      width: 100%;
+    }
+
+    .image {
+      grid-area: image;
+
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+
+      height: 150px;
+    }
+
+    .nom {
+      grid-area: nom;
+
+      margin: 0;
+    }
+
+    .lieu_date {
+      grid-area: lieu_date;
+
+      margin: 0 0 5px 0;
+      font-size: 80%;
+    }
+
+    .actions {
+      grid-area: actions;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      grid-template-areas: "consulter modifier";
+
+      .consulter {
+        grid-area: consulter;
+        margin: 0 5px;
+      }
+
+      .modifier {
+        grid-area: modifier;
+        margin: 0 5px;
+      }
+    }
+  }
+}
+
+/************** FIN PAGE D'INDEX DES BROCANTES **************/
+
+
+/************** PAGE DE CONSULTATION D'UNE BROCANTE **************/
+
+.brocante {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: "nom" "lieu_date" "image" "description";
+
+  .nom {
+    grid-area: nom;
+  }
+
+  .lieu_date {
+    grid-area: lieu_date;
+  }
+
+  .image {
+    grid-area: image;
+
+    height: 300px;
+  }
+
+  .description {
+    grid-area: description;
+
+    text-align: justify
+  }
+}
+
+/************** FIN PAGE DE CONSULTATION D'UNE BROCANTE **************/
+
+
+/************** VUE BROCANTES PAR DEPARTEMENT **************/
+
+.broc_show {
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none;
+  }
+
+  .b_main_date {
+    text-transform: capitalize;
+    background-color: #575dff;
+    color: #F5F5F5;
+    font-weight: bold;
+    padding: 5px 0 5px 10px;
+  }
+
+  .block_show {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "b_date b_icon b_titles" "b_date b_icon b_subtitles";
+
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e6e6e6;
+
+    .b_titles_ville {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    &:hover {
+      background-color: #f1f2f3;
+
+      .b_subtitles {
+        font-weight: bold;
+      }
+    }
+
+    .b_icon {
+      grid-area: b_icon;
+      padding-top: 10px;
+      padding-right: 15px;
+      color: #575dff;
+    }
+
+    .b_date {
+      grid-area: b_date;
+      padding-top: 13px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+    .b_titles {
+      grid-area: b_titles;
+    }
+
+    .b_subtitles {
+      grid-area: b_subtitles;
+      font-size: 13px;
+    }
+  }
+}
+
+.s_adresse {
+  color: #575dff;
+}
+
+.broc_show_showID {
+  .id_infos_head {
+    background-color: #575dff;
+    color: #F5F5F5;
+    font-weight: bold;
+    padding: 5px 0 5px 10px;
+
+    i {
+      padding-right: 15px;
+    }
+  }
+
+  .id_presentation {
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "id_img id_horaires" "id_img id_entree" "id_img id_nb_exposants";
+
+    .id_img {
+      grid-area: id_img;
+      padding-right: 15px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .id_horaires {
+      grid-area: id_horaires;
+      display: grid;
+      grid-template-columns: 40px 150px auto;
+      grid-template-areas: "f_logo id_f id_f_a";
+
+      .id_f {
+        grid-area: id_f;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .id_f_a {
+        grid-area: id_f_a;
+      }
+
+      .f_logo {
+        grid-area: f_logo;
+        padding-top: 5px;
+      }
+
+      i {
+        padding-right: 15px;
+        color: #575dff;
+      }
+    }
+
+    .id_entree {
+      grid-area: id_entree;
+      display: grid;
+      grid-template-columns: 40px 150px auto;
+      grid-template-areas: "f_logo id_f id_f_a";
+
+      .id_f {
+        grid-area: id_f;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .id_f_a {
+        grid-area: id_f_a;
+      }
+
+      .f_logo {
+        grid-area: f_logo;
+        padding-top: 5px;
+      }
+
+      i {
+        padding-right: 15px;
+        color: #575dff;
+      }
+    }
+
+    .id_nb_exposants {
+      grid-area: id_nb_exposants;
+      display: grid;
+      grid-template-columns: 40px 150px auto;
+      grid-template-areas: "f_logo id_f id_f_a";
+
+      .id_f {
+        grid-area: id_f;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .id_f_a {
+        grid-area: id_f_a;
+      }
+
+      .f_logo {
+        grid-area: f_logo;
+        padding-top: 2px;
+      }
+
+      i {
+        padding-right: 15px;
+        color: #575dff;
+      }
+    }
+  }
+}
+
+.id_description {
+  text-align: justify;
+}
+
+.broc_access {
+  .access_title {
+    background-color: #575dff;
+    color: #F5F5F5;
+    font-weight: bold;
+    padding: 5px 0 5px 10px;
+
+    i {
+      padding-right: 15px;
+    }
+  }
+
+  .access_map {
+    height: 400px;
+    width: 100%;
+    background-color: grey;
+  }
+}
+
+/************** FIN VUE BROCANTES PAR DEPARTEMENT **************/
+
+/************** FIN APP **************/
+
+
+/************** PAGES D'AIDES **************/
+
+.cm_banner {
+  img {
+    width: 100%;
+  }
+}
+
+.cm_m_content {
+  a {
+    text-decoration: none;
+    color: #e9780e;
+
+    &:hover {
+      color: #575dff;
+    }
+  }
+}
+
+.help_page {
+  ol {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    padding-left: 1.3em;
+    text-align: justify;
+
+    &:before {
+      content: "\f101"; /* FontAwesome Unicode */
+      font-family: FontAwesome;
+      display: inline-block;
+      margin-left: -1.3em;
+      width: 1.3em;
+    }
+  }
+
+  p {
+    text-align: justify;
+  }
+}
+
+.cm_end_block {
+  font-weight: bold;
+}
+
+.title1 {
+  text-align: center;
+  color: grey;
+}
+
+/************** FIN PAGES D'AIDES **************/

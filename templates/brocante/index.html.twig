@@ -1,0 +1,26 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+    <div class="brocantes">
+        {% for brocante in brocantes %}
+            <div class="brocante">
+                <img class="image"
+                     src="{% if brocante.image %}{{ brocante.image }}{% else %}{{ asset('build/no_image.png') }}{% endif %}"
+                     alt="{{ brocante.nom }}"/>
+
+                <p class="nom">{{ brocante.nom }}</p>
+
+                <p class="lieu_date">{{ brocante.lieu }}, le {{ brocante.date | date('d/m/Y H:i') }}</p>
+
+                <div class="actions">
+                    <a href="{{ path('brocante_show', {'id' : brocante.idBrocante}) }}"
+                       class="btn btn-secondary consulter">Consulter</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,21 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+    <h1>Suggérer une brocante !</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.lieu) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.rue) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.image) }}
+
+    {{ form_row(form.submit) }}
+    {{ form_row(form.cancel) }}
+    {{ form_end(form) }}
+{% endblock %}
